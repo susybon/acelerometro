@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link href="css/jquery.mobile-1.4.5.css" rel="stylesheet" />
+<link href="css/jquery.mobile.theme-1.4.5.css" rel="stylesheet" />
+<link href="css/jquery.mobile.structure-1.4.5.css" rel="stylesheet" />
+<script src="js/jquery-2.1.4.min.js" type="text/javascript" ></script>
+<script src="js/jquery.mobile-1.4.5.js" type="text/javascript"></script> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title><script type="text/javascript">
+	//El identificador del visor de aceleración adetener
+	var watchID=null;
+	//Espere a que phonegap se inicilise
+	document.addEventListener("deviceready", onDeviseReady, false);
+	//Phonegap esta listo
+	function onDeviseReady(){
+	startWatch();
+	}
+	
+	//Empieza a observar la aceleración
+	function starWatch(){
+	//Actualizar acda 3 segundos
+	var options ={frecuency:3000}
+	
+	whatchID=navigator.accelerometer.watchAceleration(onSuccess, onError, options);
+	}
+	
+	//Deja de observar la aceleración
+	function stopWatch(){
+		if(watchID){
+			navigator.acelerometer.clearWatch(watchID);
+			watchID=null;
+		}
+	}
+	
+	//onSuccess: Obtiene el resultado de la aceleración actual
+	
+	function onSuccess(acceleration){
+		var element=document.getElementById('accelerometer');
+		element.ennerHTML='Aceleracion X: ' + acceleration.x + '<br />' +
+						  'Aceleracion Y: ' + acceleration.y + '<br />' +
+						  'Aceleracion Z: ' + acceleration.z + '<br />' +
+						  'Timestamp: '     + acceleration.timestamp + ' <br />';
+	}
+	
+	//onError: Fallo al obtener la aceleración
+	
+	function onError(){
+		alert('onError!' + error);
+	}
+	
+	</script>
+	
+</style>
+</head>
+
+<body>
+<div data-role="page" id="principal" data-theme="b">
+	<div data-role="header">
+    	<p>Encabezado de la aplicación</p>
+    </div> 
+    <div data-role="content">
+    	<p>Contenido de la aplicación</p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+    	<p>Pie de aplicación</p>
+    </div>
+</div>
+
+</body>
+</html>
